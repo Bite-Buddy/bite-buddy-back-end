@@ -19,3 +19,9 @@ app.get("/user/:id", userController.getById);
 app.post("user", userController.createUser);
 app.patch("user/:id", userController.updateUser);
 app.delete("user/:id", userController.deleteUser);
+
+// kitchen
+app.get("/kitchens", kitchenController.getKitchens); // mainly here for testing
+app.get("/kitchen/:id", kitchenController.getById);
+app.get("/kitchen/:id/users", kitchenController.getUsersByKitchen); // get all related users
+app.post("/kitchen", kitchenController.createKitchen);
