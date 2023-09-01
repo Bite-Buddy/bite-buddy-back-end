@@ -14,18 +14,18 @@ datasource db {
 model User {
   id           Int      @id @default(autoincrement()) 
   email        String   @unique
-  kitchens     User_kitchens[]
+  kitchens     UserKitchens[]
   @@map("user")
 }
 
 model Kitchen {
 id           Int      @id @default(autoincrement())
-users        User_kitchens[]
+users        UserKitchens[]
 foodList     Food[]
 @@map("kitchen")
 }
 
-model User_kitchens {
+model UserKitchens {
   kitchen      Kitchen  @relation(fields: [kitchen_id], references: [id])
   kitchen_id    Int
   user         User     @relation(fields:  [user_id], references: [id])
