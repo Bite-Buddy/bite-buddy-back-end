@@ -13,7 +13,7 @@ const app = express();
   app.get("/users", userController.getUsers); // mainly here for testing
   app.get("/user/:id", userController.getById);
   app.post("user", userController.createUser);
-  app.patch("user/:id", userController.updateUserById);
+  app.patch("user/:id", userController.updateUserById); // probably need more patch endpoints
   app.delete("user/:id", userController.deleteUserById);
 
   // kitchen
@@ -21,6 +21,7 @@ const app = express();
   app.get("/kitchen/:id", kitchenController.getById);
   app.get("/kitchen/:id/users", kitchenController.getUsersByKitchen); // get all related users
   app.post("/kitchen", kitchenController.createKitchen);
+  app.delete("/kitchen/:id", kitchenController.deleteKitchen);
 
   // food
   app.get("/food", foodController.getFood);
