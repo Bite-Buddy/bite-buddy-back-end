@@ -1,8 +1,15 @@
 import express from "express";
+import expressSession from "express-session";
 
 // import * as userController from "";
 // import * as kitchenController from "";
 // import * as foodController from "";
+
+declare module 'express-session' {
+  export interface SessionData {
+    user: { [key: string]: any };
+  }
+}
 
 const app = express();
   app.use(express.json());
