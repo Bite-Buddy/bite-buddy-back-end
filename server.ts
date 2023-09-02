@@ -1,7 +1,7 @@
 import express from "express";
 import expressSession from "express-session";
 
-// import * as userController from "";
+import * as userController from "./src/user/userController";
 // import * as kitchenController from "";
 // import * as foodController from "";
 
@@ -17,6 +17,7 @@ const app = express();
 
   export default function getEndpoints() {
     // user
+  app.get("/logout", userController.logout);
   app.get("/users", userController.getUsers); // mainly here for testing
   app.get("/user/:id", userController.getById);
   app.post("user", userController.createUser);
