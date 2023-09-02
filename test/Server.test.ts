@@ -1,7 +1,7 @@
 import request from "supertest"
 import assert from "assert"
 import { default as app } from "../server"
-import { dummyUser,dummyKitchen } from "./dummy"
+import { dummyUser, dummyKitchen } from "./dummy"
 
 describe("/", () => {
     test("Should exist", async () => {
@@ -13,15 +13,15 @@ describe("/", () => {
 })
 
 describe("/:kitchenId", () => {
-    describe("/#GET", () => {
-        test("Should exist")
-    });
-    describe("/#DELETE", () => { });
+    describe("/#GET", () => { test.todo("Should get kitchen with given kitchenID") });
+    describe("/#DELETE", () => { test.todo("Should delete the record from the kitchen table and userkitchen table with given ID") });
 
     /**For food */
     describe("/:kitchenId/:ingredientId", () => {
         describe("/#GET", () => {
-            test.todo("Should get the food item with given ingredientId")
+            test.todo("Should get ingredient in the kitchen with given IDs")
+            test.todo("Should return error when wrong ID was passed")
+
         });
         describe("/#PATCH", () => {
             test.todo("Should update the food item with given ingredientID and value");
@@ -31,7 +31,10 @@ describe("/:kitchenId", () => {
     });
 
     describe("/:kitchenId/add", () => {
-        describe("/#POST", () => { test.todo("Should add new kitchen") });
+        describe("/#POST", () => {
+            test.todo("Should create the userkitchen table with given id");
+            test.todo("Should add the record in the kitchen table");
+        });
     });
 });
 
