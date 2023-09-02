@@ -48,3 +48,20 @@ export async function createKitchen(req: Request, res: Response) {
         res.status(500).send("Error: " + error)
     }
 }
+
+export async function deleteKitchen(req: Request, res: Response) {
+    try {
+        if (!req.session.user) {
+            res.status(400).send("Error: Please log in")
+        }
+        else {
+            const userId = req.session.user?.id;
+            const kitchenId = req.params.id;
+            await kitchenModel.deleteKitchen(userId, kitchenId);
+            res.status(200).send("Kitchen deleted")
+        }
+    }
+    catch (error) {
+        res.status(500).send("Error: " + error)
+    }
+}
