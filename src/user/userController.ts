@@ -48,7 +48,7 @@ export async function createUser(req: Request, res: Response) {
     }
 }
 
-export async function updateUser(req: Request, res: Response) {
+export async function updateUserById(req: Request, res: Response) {
     try {
         const id = req.params.id;
         await userModel.updatedUser(id);
