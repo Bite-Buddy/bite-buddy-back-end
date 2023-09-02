@@ -3,7 +3,7 @@ import expressSession from "express-session";
 
 import * as userController from "./src/user/userController";
 import * as kitchenController from "./src/kitchen/kitchenController";
-// import * as foodController from "";
+import * as foodController from "./src/food/foodController";
 
 declare module 'express-session' {
   export interface SessionData {
