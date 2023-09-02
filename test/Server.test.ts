@@ -1,5 +1,4 @@
 import request from "supertest"
-import assert from "assert"
 import { default as app } from "../server"
 import { dummyUser, dummyKitchen } from "./dummy"
 
