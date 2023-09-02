@@ -27,11 +27,19 @@ export async function updateFoodById(foodId: number, foodUpdate: IFoodUpdate) {
     data: foodUpdate
   });
 }
+
 export async function getFoodById(foodId: number) {
   return  await prisma.food.findUnique({
     where: {id: foodId}
   });
 }
+
 export async function getFood() {
   return  await prisma.food.findMany();
+}
+
+export async function deleteFoodById(foodId: number) {
+  return  await prisma.food.delete({
+    where: {id: foodId}
+  });
 }
