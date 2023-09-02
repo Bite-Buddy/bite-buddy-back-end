@@ -21,7 +21,7 @@ model User {
 model Kitchen {
 id           Int      @id @default(autoincrement())
 users        UserKitchens[]
-foodList     Food[]
+food_list     Food[]
 @@map("kitchen")
 }
 
@@ -38,8 +38,8 @@ model UserKitchens {
 model Food {
   id           Int        @id @default(autoincrement())
   name         String     @db.VarChar(255)
-  boughtOn     DateTime   @default(now())
-  updatedOn    DateTime   @default(now())
+  bought_on     DateTime   @default(now())
+  updated_on    DateTime   @default(now())
   kitchen      Kitchen    @relation(fields: [kitchen_id], references: [id])
   kitchen_id    Int
   @@map("food")
