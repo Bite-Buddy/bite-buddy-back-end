@@ -48,5 +48,17 @@ export async function createUser(req: Request, res: Response) {
     }
 }
 
+export async function updateUser(req: Request, res: Response) {
+    try {
+        const id = req.params.id;
+        await userModel.updatedUser(id);
+        res.status(200).send("User updated");
+    }
+    catch (error) {
+        res.status(500).send("Error: " + error);
+    }
+}
+    
+
 
 
