@@ -22,5 +22,31 @@ export async function getUsers(req: Request, res: Response) {
     }
 }
 
+export async function getById(req: Request, res: Response) {
+    try {
+        const id = req.params.id;
+        const user = await userModel.getById(id);
+        res.status(200).send(user)
+    }
+    catch (error) {
+        res.status(500).send("Error: " + error)
+    }
+}
+
+export async function createUser(req: Request, res: Response) {
+    try {
+        if (!req.body.email) {
+            res.status(400).send("Error: no email")
+        }
+        else {
+            await userModel.createUser(req.body);
+            res.status(200).send("User created");
+        }
+    }
+    catch (error) {
+        res.status(500).send("Error: " + error);
+    }
+}
+
 
 
