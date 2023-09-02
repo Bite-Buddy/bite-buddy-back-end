@@ -21,3 +21,21 @@ export async function getFoodById(req: Request, res: Response) {
         res.status(500).send("Error: " + error)
     }
 }
+
+export async function createFood(req: Request, res: Response) {
+    try {
+        if (!req.session.user) {
+            res.status(400).send("Error: Please log in");
+        }
+        else {
+            const userID = req.session.user?.id;
+            const kitchenID = req.params.id;
+            const foodName = req.body.name;
+            await foodModel.createFood(userID, kitchenID, foodName);
+            res.status(200).send("Food added")
+        }
+    }
+    catch (error) { 
+        res.status(500).send("Error: " + error)
+    }
+}
