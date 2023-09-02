@@ -18,3 +18,17 @@ export async function deleteKitchen(kitchenId: number) {
     where: {id: kitchenId}
   });
 }
+
+export async function getUsersByKitchen(kitchenId: number) {
+  return  await prisma.user.findMany({
+    where: {
+      kitchens: {
+        some: {
+          kitchen: {
+            id: kitchenId
+          }
+        }
+      }
+    }
+  });
+}
