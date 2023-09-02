@@ -1,4 +1,5 @@
 import {Request, Response} from 'express';
+import userModel from "./userModel"
 
 export async function logout(req: Request, res: Response) {
     req.session.destroy((error: any) => {
@@ -9,6 +10,16 @@ export async function logout(req: Request, res: Response) {
             res.status(200).send("Logging out");
         }
     });
+}
+
+export async function getUsers(req: Request, res: Response) {
+    try {
+        const users = await userModel.getUsers();
+        res.status(200).send(users)
+    }
+    catch (error) {
+        res.status(500).send("Error: " + error)
+    }
 }
 
 
