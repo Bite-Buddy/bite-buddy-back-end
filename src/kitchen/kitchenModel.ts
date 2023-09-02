@@ -38,3 +38,7 @@ export async function getById(kitchenId: number) {
     where: {id: kitchenId}
   });
 }
+
+export async function getKitchens() {
+  return  await prisma.kitchen.findMany();
+}
