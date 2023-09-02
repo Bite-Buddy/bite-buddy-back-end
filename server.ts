@@ -2,7 +2,7 @@ import express from "express";
 import expressSession from "express-session";
 
 import * as userController from "./src/user/userController";
-// import * as kitchenController from "";
+import * as kitchenController from "./src/kitchen/kitchenController";
 // import * as foodController from "";
 
 declare module 'express-session' {
