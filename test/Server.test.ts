@@ -38,3 +38,10 @@ describe("/:kitchenId", () => {
     });
 });
 
+describe("/logout", () => {
+    describe("/#GET", () => { test.todo("Should logout") });
+});
+
+describe("/settings", () => {
+    describe("/#GET", () => { test.todo("Should get user's settings")/**Shouldn't it to be included in user? */ })
+});
