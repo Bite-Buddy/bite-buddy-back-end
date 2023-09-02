@@ -32,3 +32,9 @@ export async function getUsersByKitchen(kitchenId: number) {
     }
   });
 }
+
+export async function getById(kitchenId: number) {
+  return  await prisma.kitchen.findUnique({
+    where: {id: kitchenId}
+  });
+}
