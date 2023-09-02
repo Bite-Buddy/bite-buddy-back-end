@@ -21,3 +21,14 @@ export async function getById(req: Request, res: Response) {
         res.status(500).send("Error: " + error)
     }
 }
+
+export async function getUsersByKitchen(req: Request, res: Response) {
+    try {
+        const id = req.params.id;
+        const users = await kitchenModel.getUsersByKitchen(id);
+        res.status(200).send(users)
+    }
+    catch (error) {
+        res.status(500).send("Error: " + error)
+    }
+}
