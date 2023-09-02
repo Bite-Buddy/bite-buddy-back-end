@@ -1,5 +1,5 @@
 import {Request, Response} from 'express';
-import foodModel from "./foodModel"
+import * as foodModel from "./foodModel";
 
 export async function getFood(req: Request, res: Response) {
     try {

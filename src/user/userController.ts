@@ -1,5 +1,5 @@
 import {Request, Response} from 'express';
-import userModel from "./userModel"
+import * as userModel from "./userModel"
 
 export async function logout(req: Request, res: Response) {
     req.session.destroy((error: any) => {
