@@ -52,8 +52,25 @@ export async function updateFoodById(req: Request, res: Response) {
             const foodName = req.body.name;
             await foodModel.updateFoodById(userID, kitchenID, foodID, foodName);
             res.status(200).send("Food added")
+        }  
+    }
+    catch (error) { 
+        res.status(500).send("Error: " + error)
+    }
+}
+
+export async function deleteFoodById(req: Request, res: Response) {
+    try {
+        if (!req.session.user) {
+            res.status(400).send("Error: Please log in");
         }
-        
+        else {
+            const userID = req.session.user?.id;
+            const kitchenID = req.params.kitchenId;
+            const foodID = req.params.foodId;
+            await foodModel.deleteFoodById(userID, kitchenID, foodID);
+            res.status(200).send("Food deleted")
+        }
     }
     catch (error) { 
         res.status(500).send("Error: " + error)
