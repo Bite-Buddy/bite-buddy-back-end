@@ -11,3 +11,13 @@ export async function getKitchens(req: Request, res: Response) {
     }
 }
 
+export async function getById(req: Request, res: Response) {
+    try {
+        const id = req.params.id;
+        const kitchen = await kitchenModel.getById(id);
+        res.status(200).send(kitchen)
+    }
+    catch (error) {
+        res.status(500).send("Error: " + error)
+    }
+}
