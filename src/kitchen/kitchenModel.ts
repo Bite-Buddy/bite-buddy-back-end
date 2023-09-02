@@ -12,3 +12,9 @@ export async function createKitchen(userId: number) {
     },
   });
 }
+
+export async function deleteKitchen(kitchenId: number) {
+  return  await prisma.kitchen.delete({
+    where: {id: kitchenId}
+  });
+}
