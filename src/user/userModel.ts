@@ -11,15 +11,6 @@ export async function createNewUser(user: IUser) {
 }
 
 export async function getUsers() {
-  return await prisma.user.create({
-    data: user
-  })
+  return await prisma.user.findMany()
 }
 
-export async function findUser(email: string) {
-  return await prisma.user.findUnique({
-    where: {
-      email: email
-    }
-  })
-}
