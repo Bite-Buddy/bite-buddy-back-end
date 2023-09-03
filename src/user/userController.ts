@@ -25,7 +25,7 @@ export async function getUsers(req: Request, res: Response) {
 export async function getById(req: Request, res: Response) {
     try {
         const id = req.params.id;
-        const user = await userModel.getById(id);
+        const user = await userModel.getById(parseInt(id));
         res.status(200).send(user)
     }
     catch (error) {
@@ -53,27 +53,27 @@ export async function createUser(req: Request, res: Response) {
 // We would need the session id or the token from supabase to see the user is logged in first before being able to update and delete
 // For MVP, these functionalities doon't have to be super fleshed out, these are just basic things we can use for testing
 
-export async function updateUserById(req: Request, res: Response) {
-    try {
-        const id = req.params.id;
-        await userModel.updatedUser(id);
-        res.status(200).send("User updated");
-    }
-    catch (error) {
-        res.status(500).send("Error: " + error);
-    }
-}
+// export async function updateUserById(req: Request, res: Response) {
+//     try {
+//         const id = req.params.id;
+//         await userModel.updatedUser(id);
+//         res.status(200).send("User updated");
+//     }
+//     catch (error) {
+//         res.status(500).send("Error: " + error);
+//     }
+// }
 
-export async function deleteUserById(req: Request, res: Response) {
-    try {
-        const id = req.params.id;
-        await userModel.deleteUserById(id);
-        res.status(200).send("User deleted");
-    }
-    catch (error) {
-        res.status(500).send("Error: " + error)
-    }
-}
+// export async function deleteUserById(req: Request, res: Response) {
+//     try {
+//         const id = req.params.id;
+//         await userModel.deleteUserById(id);
+//         res.status(200).send("User deleted");
+//     }
+//     catch (error) {
+//         res.status(500).send("Error: " + error)
+//     }
+// }
     
 
 
