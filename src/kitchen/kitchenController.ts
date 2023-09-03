@@ -14,7 +14,7 @@ export async function getKitchens(req: Request, res: Response) {
 export async function getById(req: Request, res: Response) {
     try {
         const id = req.params.id;
-        const kitchen = await kitchenModel.getById(id);
+        const kitchen = await kitchenModel.getById(parseInt(id));
         res.status(200).send(kitchen)
     }
     catch (error) {
@@ -25,7 +25,7 @@ export async function getById(req: Request, res: Response) {
 export async function getUsersByKitchen(req: Request, res: Response) {
     try {
         const id = req.params.id;
-        const users = await kitchenModel.getUsersByKitchen(id);
+        const users = await kitchenModel.getUsersByKitchen(parseInt(id));
         res.status(200).send(users)
     }
     catch (error) {
@@ -40,7 +40,7 @@ export async function createKitchen(req: Request, res: Response) {
         }
         else {
             const userId = req.session.user?.id;
-            await kitchenModel.createKitchen(userId, req.body);
+            await kitchenModel.createKitchen(parseInt(userId));
             res.status(200).send("Kitchen added")
         }
     }
@@ -55,9 +55,8 @@ export async function deleteKitchen(req: Request, res: Response) {
             res.status(400).send("Error: Please log in")
         }
         else {
-            const userId = req.session.user?.id;
             const kitchenId = req.params.id;
-            await kitchenModel.deleteKitchen(userId, kitchenId);
+            await kitchenModel.deleteKitchen(parseInt(kitchenId));
             res.status(200).send("Kitchen deleted")
         }
     }
