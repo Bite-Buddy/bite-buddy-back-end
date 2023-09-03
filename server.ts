@@ -21,8 +21,8 @@ const app = express();
   app.get("/users", userController.getUsers); // mainly here for testing
   app.get("/users/:id", userController.getById);
   app.post("/users", userController.createUser);
-  app.patch("/users/:id", userController.updateUserById); // probably need more patch endpoints
-  app.delete("/users/:id", userController.deleteUserById);
+  // app.patch("/users/:id", userController.updateUserById); // probably need more patch endpoints
+  // app.delete("/users/:id", userController.deleteUserById);
 
   // kitchen
   app.get("/kitchens", kitchenController.getKitchens); // mainly here for testing
