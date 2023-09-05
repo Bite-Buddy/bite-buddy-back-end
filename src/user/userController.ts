@@ -23,6 +23,17 @@ export async function getById(req: Request, res: Response) {
     }
 }
 
+export async function getBySupabaseId(req: Request, res: Response) {
+    try {
+        const id = req.params.id;
+        const user = await userModel.getBySupabaseId(id);
+        res.status(200).send(user)
+    }
+    catch (error) {
+        res.status(500).send("Error: " + error)
+    }
+}
+
 export async function createUser(req: Request, res: Response) {
     try {
         if (!req.body.email || req.body.id) {
