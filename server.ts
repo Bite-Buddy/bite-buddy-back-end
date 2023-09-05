@@ -10,7 +10,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true })); // For parsing form data (application/x-www-form-urlencoded)
 app.use(cors())
 
- const endpoints = () => {
+export default function getEndpoints() {
     // user
   app.get("/users", userController.getUsers); // mainly here for testing
   app.get("/users/:id", userController.getById);
@@ -34,5 +34,3 @@ app.use(cors())
 
   return app;
 }
-
-export {endpoints};
