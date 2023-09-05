@@ -1,6 +1,7 @@
 import prisma from '../util/prisma-client';
 
 interface IUser {
+  supabase_id: string,
   email: string,
 }
 

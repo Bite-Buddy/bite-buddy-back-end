@@ -25,8 +25,8 @@ export async function getById(req: Request, res: Response) {
 
 export async function createUser(req: Request, res: Response) {
     try {
-        if (!req.body.email) {
-            res.status(400).send("Error: no email")
+        if (!req.body.email || req.body.id) {
+            res.status(400).send("Error: missing user info")
         }
         else {
             await userModel.createUser(req.body);
