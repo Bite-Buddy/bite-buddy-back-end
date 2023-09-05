@@ -1,14 +1,16 @@
 import express from "express";
+import cors from "cors";
 
 import * as userController from "./src/user/userController";
 import * as kitchenController from "./src/kitchen/kitchenController";
 import * as foodController from "./src/food/foodController";
 
 const app = express();
-  app.use(express.json());
-  app.use(express.urlencoded({ extended: true })); // For parsing form data (application/x-www-form-urlencoded)
+app.use(express.json());
+app.use(express.urlencoded({ extended: true })); // For parsing form data (application/x-www-form-urlencoded)
+app.use(cors())
 
-  export default function getEndpoints() {
+ const endpoints = () => {
     // user
   app.get("/users", userController.getUsers); // mainly here for testing
   app.get("/users/:id", userController.getById);
@@ -32,3 +34,5 @@ const app = express();
 
   return app;
 }
+
+export {endpoints};
