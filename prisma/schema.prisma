@@ -12,7 +12,8 @@ datasource db {
 
 
 model User {
-  id           Int      @id @default(autoincrement()) 
+  id           Int      @id @default(autoincrement())
+  supabase_id  String   @unique
   email        String   @unique
   kitchens     UserKitchens[]
   @@map("user")
