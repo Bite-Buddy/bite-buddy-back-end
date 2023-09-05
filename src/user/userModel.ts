@@ -22,3 +22,11 @@ export async function getById(id: number) {
     }
   })
 }
+
+export async function getBySupabaseId(supabase_id: string) {
+  return await prisma.user.findUnique({
+    where: {
+      supabase_id: supabase_id
+    }
+  })
+}
