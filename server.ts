@@ -14,7 +14,7 @@ export default function getEndpoints() {
     // user
   app.get("/users", userController.getUsers); // mainly here for testing
   app.get("/users/:id", userController.getById);
-  app.get("/users/supabase/:id", userController.getById);
+  app.get("/users/supabase/:id", userController.getBySupabaseId);
   app.post("/users", userController.createUser);
   // app.patch("/users/:id", userController.updateUserById); // probably need more patch endpoints
   // app.delete("/users/:id", userController.deleteUserById);
