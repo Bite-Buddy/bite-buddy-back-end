@@ -19,9 +19,9 @@ const app = express();
   // kitchen
   app.get("/kitchens", kitchenController.getKitchens); // mainly here for testing
   app.get("/kitchens/:id", kitchenController.getById);
-  app.get("/kitchens/:id/users", kitchenController.getUsersByKitchen); // get all related users
-  app.post("/users/kitchen", kitchenController.createKitchen);
-  app.delete("/users/kitchen/:id", kitchenController.deleteKitchen);
+  app.get("/kitchens/users/:id", kitchenController.getUsersByKitchen); // get all related users
+  app.post("/kitchens/users/:id", kitchenController.createKitchen);
+  app.delete("/kitchens/users/:id", kitchenController.deleteKitchen);
 
   // food
   app.get("/foods", foodController.getFood);
