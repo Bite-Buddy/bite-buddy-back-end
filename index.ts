@@ -1,6 +1,6 @@
-import getEndpoints from "./server";
+import {endpoints} from "./server";
 
-const app = getEndpoints();
+const app = endpoints();
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
