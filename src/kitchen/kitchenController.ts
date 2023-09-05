@@ -35,14 +35,9 @@ export async function getUsersByKitchen(req: Request, res: Response) {
 
 export async function createKitchen(req: Request, res: Response) {
     try {
-        if (!req.session.user) {
-            res.status(400).send("Error: Please log in")
-        }
-        else {
-            const userId = req.session.user?.id;
-            await kitchenModel.createKitchen(parseInt(userId));
-            res.status(200).send("Kitchen added")
-        }
+        const userId = req.params.id;
+        await kitchenModel.createKitchen(parseInt(userId));
+        res.status(200).send("Kitchen added")   
     }
     catch (error) {
         res.status(500).send("Error: " + error)
@@ -51,14 +46,9 @@ export async function createKitchen(req: Request, res: Response) {
 
 export async function deleteKitchen(req: Request, res: Response) {
     try {
-        if (!req.session.user) {
-            res.status(400).send("Error: Please log in")
-        }
-        else {
-            const kitchenId = req.params.id;
-            await kitchenModel.deleteKitchen(parseInt(kitchenId));
-            res.status(200).send("Kitchen deleted")
-        }
+        const kitchenId = req.params.id;
+        await kitchenModel.deleteKitchen(parseInt(kitchenId));
+        res.status(200).send("Kitchen deleted")
     }
     catch (error) {
         res.status(500).send("Error: " + error)
