@@ -38,7 +38,7 @@ export async function getBySupabaseId(req: Request, res: Response) {
 
 export async function createUser(req: Request, res: Response) {
     try {
-        if (!req.body.email || !req.body.id) {
+        if (!req.body.email || !req.body.supabase_id) {
             res.status(400).send("Error: missing user info")
         }
         else {
