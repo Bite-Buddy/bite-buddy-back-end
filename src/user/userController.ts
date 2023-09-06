@@ -3,6 +3,7 @@ import * as userModel from "./userModel"
 
 
 export async function getUsers(req: Request, res: Response) {
+    console.log("😂😂😂😂")
     try {
         const users = await userModel.getUsers();
         res.status(200).send(users)
@@ -24,6 +25,7 @@ export async function getById(req: Request, res: Response) {
 }
 
 export async function getBySupabaseId(req: Request, res: Response) {
+    console.log("🙌🙌🙌🙌")
     try {
         const id = req.params.id;
         const user = await userModel.getBySupabaseId(id);
@@ -36,7 +38,7 @@ export async function getBySupabaseId(req: Request, res: Response) {
 
 export async function createUser(req: Request, res: Response) {
     try {
-        if (!req.body.email || req.body.id) {
+        if (!req.body.email || !req.body.id) {
             res.status(400).send("Error: missing user info")
         }
         else {
