@@ -8,7 +8,11 @@ import * as foodController from "./src/food/foodController";
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true })); // For parsing form data (application/x-www-form-urlencoded)
-app.use(cors())
+app.use(cors({
+  origin: "*",
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
+  credentials: true,
+}));
 
 export default function getEndpoints() {
     // user
