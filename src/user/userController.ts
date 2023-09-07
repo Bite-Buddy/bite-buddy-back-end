@@ -42,8 +42,8 @@ export async function createUser(req: Request, res: Response) {
             res.status(400).send("Error: missing user info")
         }
         else {
-            await userModel.createUser(req.body);
-            res.status(200).send("User created");
+            const user = await userModel.createUser(req.body);
+            res.status(200).send(user);
         }
     }
     catch (error) {
