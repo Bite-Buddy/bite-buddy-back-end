@@ -31,10 +31,13 @@ export async function getFoodById(req: Request, res: Response) {
 export async function createFood(req: Request, res: Response) {
     try {
         const kitchenID = parseInt(req.params.id);
-        const foodName = req.body.name;
-        await foodModel.createFood(kitchenID, foodName);
+        const { name, boughtOn } = req.body;
+        const boughtOnDate = new Date(boughtOn);
+        if (!name || typeof name !== 'string' || isNaN(boughtOnDate.getTime())) {
+            return res.status(400).send("Invalid 'name' or 'boughtOnDate' value in the request.");
+        }
+        await foodModel.createFood(kitchenID, name, boughtOn);
         res.status(200).send("Food added")
-        
     }
     catch (error) { 
         res.status(500).send("Error: " + error)
