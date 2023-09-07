@@ -2,7 +2,7 @@ import prisma from '../util/prisma-client';
 
 interface IFoodUpdate {
   name?: string,
-  bought_on?: Date,   
+  bought_on?: Date,
   updated_on?: Date
 }
 
@@ -10,7 +10,7 @@ export async function createFood(kitchenId: number, foodName: string, boughtOn: 
   return await prisma.food.create({
     data: {
       name: foodName,
-      bought_on: boughtOn,
+      bought_on: boughtOn.toISOString(),
       kitchen: {
         connect: {
           id: kitchenId
