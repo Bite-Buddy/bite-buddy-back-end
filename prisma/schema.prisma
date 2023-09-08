@@ -10,30 +10,19 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
 model User {
   id           Int      @id @default(autoincrement())
   supabase_id  String   @unique
   email        String   @unique
-  kitchens     UserKitchens[]
+  kitchens     UserKitchens[] 
   @@map("user")
 }
 
 model Kitchen {
 id           Int      @id @default(autoincrement())
 users        UserKitchens[]
-food_list     Food[]
+food_list     Food[]  
 @@map("kitchen")
-}
-
-model UserKitchens {
-  kitchen      Kitchen  @relation(fields: [kitchen_id], references: [id])
-  kitchen_id    Int
-  user         User     @relation(fields:  [user_id], references: [id])
-  user_id       Int      
-
-  @@id([kitchen_id, user_id])
-  @@map("user_kitchens")
 }
 
 model Food {
@@ -41,7 +30,18 @@ model Food {
   name         String     @db.VarChar(255)
   bought_on     DateTime   @default(now())
   updated_on    DateTime   @default(now())
-  kitchen      Kitchen    @relation(fields: [kitchen_id], references: [id])
+  kitchen      Kitchen    @relation(fields: [kitchen_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
   kitchen_id    Int
   @@map("food")
 }
+
+model UserKitchens {
+  kitchen      Kitchen  @relation(fields: [kitchen_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  kitchen_id    Int 
+  user         User     @relation(fields:  [user_id], references: [id])
+  user_id       Int      
+
+  @@id([kitchen_id, user_id])
+  @@map("user_kitchens")
+}
+
