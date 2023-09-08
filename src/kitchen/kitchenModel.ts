@@ -35,7 +35,8 @@ export async function getUsersByKitchen(kitchenId: number) {
 
 export async function getById(kitchenId: number) {
   return  await prisma.kitchen.findUnique({
-    where: {id: kitchenId}
+    where: { id: kitchenId },
+    include: { food_list: true }
   });
 }
 
