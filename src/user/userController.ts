@@ -51,7 +51,7 @@ export async function createUser(req: Request, res: Response) {
     }
 }
 
-//When thinking about these next two functions I realized they will be more complex (needing to be logged in with 
+// When thinking about these next two functions I realized they will be more complex (needing to be logged in with 
 // supabase first before approval to udpate then specifying what of the user account to update, which for us would just be the user's kitchens)
 // We would need the session id or the token from supabase to see the user is logged in first before being able to update and delete
 // For MVP, these functionalities doon't have to be super fleshed out, these are just basic things we can use for testing
@@ -67,16 +67,19 @@ export async function createUser(req: Request, res: Response) {
 //     }
 // }
 
-// export async function deleteUserById(req: Request, res: Response) {
-//     try {
-//         const id = req.params.id;
-//         await userModel.deleteUserById(id);
-//         res.status(200).send("User deleted");
-//     }
-//     catch (error) {
-//         res.status(500).send("Error: " + error)
-//     }
-// }
+export async function deleteUserById(req: Request, res: Response) {
+    try {
+        const id = req.params.id;
+        const userResponse = await userModel.deleteUserById(parseInt(id));
+        res.status(200).send({
+            message: "User deleted",
+            userResponse: userResponse,
+        });
+    }
+    catch (error) {
+        res.status(500).send("Error: " + error)
+    }
+}
     
 
 

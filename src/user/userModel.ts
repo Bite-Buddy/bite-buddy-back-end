@@ -30,3 +30,9 @@ export async function getBySupabaseId(supabase_id: string) {
     }
   })
 }
+
+export async function deleteUserById(id: number) {
+  return  await prisma.user.delete({
+    where: {id: id}
+  });
+}
