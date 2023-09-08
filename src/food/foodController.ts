@@ -31,10 +31,12 @@ export async function getFoodById(req: Request, res: Response) {
 export async function createFood(req: Request, res: Response) {
     try {
         const kitchenID = parseInt(req.params.id);
-        const food: IFood = req.body;
-        await foodModel.createFood(kitchenID, food);
-        res.status(200).send("Food added")
-        
+        const foodRequest: IFood = req.body;
+        const foodResponse = await foodModel.createFood(kitchenID, foodRequest);
+        res.status(200).send({
+            message: "Food added",
+            food: foodResponse,
+        })
     }
     catch (error) { 
         res.status(500).send("Error: " + error)
@@ -45,8 +47,11 @@ export async function updateFoodById(req: Request, res: Response) {
     try {
         const foodID = parseInt(req.params.foodId);
         const foodUpdate: IFood = req.body;
-        await foodModel.updateFoodById(foodID, foodUpdate);
-        res.status(200).send("Food updated")
+        const foodResponse = await foodModel.updateFoodById(foodID, foodUpdate);
+        res.status(200).send({
+            message: "Food updated",
+            foodResponse: foodResponse,
+        })
     }  
     catch (error) { 
         res.status(500).send("Error: " + error)
@@ -56,9 +61,11 @@ export async function updateFoodById(req: Request, res: Response) {
 export async function deleteFoodById(req: Request, res: Response) {
     try {
         const foodID = req.params.foodId;
-        await foodModel.deleteFoodById(parseInt(foodID));
-        res.status(200).send("Food deleted")
-        
+        const foodResponse = await foodModel.deleteFoodById(parseInt(foodID));
+        res.status(200).send({
+            message: "Food deleted",
+            foodResponse: foodResponse,
+        })     
     }
     catch (error) { 
         res.status(500).send("Error: " + error)
