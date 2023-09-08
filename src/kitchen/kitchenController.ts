@@ -36,8 +36,11 @@ export async function getUsersByKitchen(req: Request, res: Response) {
 export async function createKitchen(req: Request, res: Response) {
     try {
         const userId = req.params.id;
-        await kitchenModel.createKitchen(parseInt(userId));
-        res.status(200).send("Kitchen added")   
+        const kitchen = await kitchenModel.createKitchen(parseInt(userId));
+        res.status(201).json({
+            message: "Kitchen added",
+            kitchen: kitchen,
+          });
     }
     catch (error) {
         res.status(500).send("Error: " + error)
@@ -47,8 +50,11 @@ export async function createKitchen(req: Request, res: Response) {
 export async function deleteKitchen(req: Request, res: Response) {
     try {
         const kitchenId = req.params.id;
-        await kitchenModel.deleteKitchen(parseInt(kitchenId));
-        res.status(200).send("Kitchen deleted")
+        const kitchenResponse = await kitchenModel.deleteKitchen(parseInt(kitchenId));
+        res.status(200).send({
+            message: "Kitchen deleted",
+            kitchenResponse: kitchenResponse,
+        })
     }
     catch (error) {
         res.status(500).send("Error: " + error)
