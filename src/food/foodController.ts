@@ -1,10 +1,10 @@
 import {Request, Response} from 'express';
 import * as foodModel from "./foodModel";
 
-interface IFoodUpdate {
-    name?: string,
-    bought_on?: Date,   
-    updated_on?: Date
+interface IFood {
+    name: string,
+    bought_on: Date,   
+    updated_on: Date
   }
 
 export async function getFood(req: Request, res: Response) {
@@ -31,8 +31,8 @@ export async function getFoodById(req: Request, res: Response) {
 export async function createFood(req: Request, res: Response) {
     try {
         const kitchenID = parseInt(req.params.id);
-        const foodName = req.body.name;
-        await foodModel.createFood(kitchenID, foodName);
+        const food: IFood = req.body;
+        await foodModel.createFood(kitchenID, food);
         res.status(200).send("Food added")
         
     }
@@ -44,7 +44,7 @@ export async function createFood(req: Request, res: Response) {
 export async function updateFoodById(req: Request, res: Response) {
     try {
         const foodID = parseInt(req.params.foodId);
-        const foodUpdate: IFoodUpdate = req.body;
+        const foodUpdate: IFood = req.body;
         await foodModel.updateFoodById(foodID, foodUpdate);
         res.status(200).send("Food updated")
     }  

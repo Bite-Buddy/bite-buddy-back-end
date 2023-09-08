@@ -1,25 +1,22 @@
 import prisma from '../util/prisma-client';
 
-interface IFoodUpdate {
-  name?: string,
-  bought_on?: Date,   
-  updated_on?: Date
+interface IFood {
+  name: string,
+  bought_on: Date,   
+  updated_on: Date
 }
 
-export async function createFood(kitchenId: number, foodName: string) {
-  return  await prisma.food.create({
+export async function createFood(kitchenId: number, food: IFood) {
+  return await prisma.food.create({
     data: {
-      name: foodName,
+      ...food, // Spread the food object to include its properties
       kitchen: {
-        create: [
-          { kitchen: { connect: { id: kitchenId } } },
-        ],
+        connect: { id: kitchenId },
       },
     },
   });
 }
-
-export async function updateFoodById(foodId: number, foodUpdate: IFoodUpdate) {
+export async function updateFoodById(foodId: number, foodUpdate: IFood) {
   return  await prisma.food.update({
     where: {
       id: foodId
