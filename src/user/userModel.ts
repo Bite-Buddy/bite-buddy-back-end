@@ -12,14 +12,17 @@ export async function createUser(user: IUser) {
 }
 
 export async function getUsers() {
-  return await prisma.user.findMany()
+  return await prisma.user.findMany({
+    include: { kitchens: true } //will also send other related users but we can refactor later
+  })
 }
 
 export async function getById(id: number) {
   return await prisma.user.findUnique({
     where: {
       id: id
-    }
+    },
+    include: { kitchens: true } //will also send other related users but we can refactor later
   })
 }
 
@@ -27,7 +30,8 @@ export async function getBySupabaseId(supabase_id: string) {
   return await prisma.user.findUnique({
     where: {
       supabase_id: supabase_id
-    }
+    },
+    include: { kitchens: true } //will also send other related users but we can refactor later
   })
 }
 
