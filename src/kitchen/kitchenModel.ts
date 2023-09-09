@@ -1,9 +1,10 @@
 import prisma from '../util/prisma-client';
 
 
-export async function createKitchen(userId: number) {
+export async function createKitchen(userId: number, name: string) {
   return  await prisma.kitchen.create({
     data: {
+      name: name,
       users: {
         create: [
           { user: { connect: { id: userId } } },
