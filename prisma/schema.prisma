@@ -20,8 +20,9 @@ model User {
 
 model Kitchen {
 id           Int      @id @default(autoincrement())
+name         String    @db.VarChar(255)
 users        UserKitchens[]
-food_list     Food[]  
+food_list    Food[]  
 @@map("kitchen")
 }
 
