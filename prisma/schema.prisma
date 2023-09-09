@@ -30,6 +30,7 @@ model Food {
   name         String     @db.VarChar(255)
   bought_on     DateTime   @default(now())
   updated_on    DateTime   @default(now())
+  inStock       Boolean    @default(true)
   kitchen      Kitchen    @relation(fields: [kitchen_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
   kitchen_id    Int
   @@map("food")

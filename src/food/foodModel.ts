@@ -3,7 +3,8 @@ import prisma from '../util/prisma-client';
 interface IFood {
   name: string,
   bought_on: Date,   
-  updated_on: Date
+  updated_on: Date,
+  inStock: boolean,
 }
 
 export async function createFood(kitchenId: number, food: IFood) {

@@ -4,7 +4,8 @@ import * as foodModel from "./foodModel";
 interface IFood {
     name: string,
     bought_on: Date,   
-    updated_on: Date
+    updated_on: Date,
+    inStock: boolean,
   }
 
 export async function getFood(req: Request, res: Response) {
