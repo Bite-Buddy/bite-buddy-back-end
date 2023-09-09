@@ -6,11 +6,11 @@ export async function createKitchen(userId: number, name: string) {
     data: {
       name: name,
       users: {
-        create: [
-          { user: { connect: { id: userId } } },
-        ],
-      },
-    },
+        connect: {
+          id: userId
+        }
+      }
+    }
   });
 }
 
@@ -25,9 +25,7 @@ export async function getUsersByKitchen(kitchenId: number) {
     where: {
       kitchens: {
         some: {
-          kitchen: {
-            id: kitchenId
-          }
+          id: kitchenId
         }
       }
     }
