@@ -1,5 +1,5 @@
 import express from "express";
-// import cors from "cors";
+import cors from "cors";
 
 import * as userController from "./src/user/userController";
 import * as kitchenController from "./src/kitchen/kitchenController";
@@ -8,11 +8,10 @@ import * as foodController from "./src/food/foodController";
 const app = express();
 app.use(express.json());
 // app.use(express.urlencoded({ extended: true })); // For parsing form data (application/x-www-form-urlencoded)
-// app.use(cors({
-//   // origin: "http://192.168.10.108:8080",
-//   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
-//   credentials: true,
-// }));
+app.use(cors({
+  origin: "*",
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
+}));
 
 export default function getEndpoints() {
     // user
