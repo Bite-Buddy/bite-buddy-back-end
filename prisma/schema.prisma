@@ -14,14 +14,14 @@ model User {
   id           Int      @id @default(autoincrement())
   supabase_id  String   @unique
   email        String   @unique
-  kitchens     UserKitchens[] 
+  kitchens     Kitchen[] 
   @@map("user")
 }
 
 model Kitchen {
 id           Int      @id @default(autoincrement())
 name         String    @db.VarChar(255)
-users        UserKitchens[]
+users        User[]
 food_list    Food[]  
 @@map("kitchen")
 }
@@ -36,14 +36,3 @@ model Food {
   kitchen_id    Int
   @@map("food")
 }
-
-model UserKitchens {
-  kitchen      Kitchen  @relation(fields: [kitchen_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  kitchen_id    Int 
-  user         User     @relation(fields:  [user_id], references: [id])
-  user_id       Int      
-
-  @@id([kitchen_id, user_id])
-  @@map("user_kitchens")
-}
-
