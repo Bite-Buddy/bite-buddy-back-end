@@ -34,8 +34,8 @@ export default function getEndpoints() {
   app.get("/foods", foodController.getFood);
   app.get("/foods/:id", foodController.getFoodById);
   app.post("/kitchens/:id/foods", foodController.createFood);
-  app.patch("/kitchens/:kitchenId/foods/:foodId", foodController.updateFoodById);
-  app.delete("/kitchens/:kitchenId/foods/:foodId", foodController.deleteFoodById);
+  app.patch("/foods/:foodId", foodController.updateFoodById);
+  app.delete("/foods/:foodId", foodController.deleteFoodById);
 
   return app;
 }
