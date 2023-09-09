@@ -36,7 +36,7 @@ export async function getUsersByKitchen(req: Request, res: Response) {
 export async function createKitchen(req: Request, res: Response) {
     try {
         const userId = req.params.id;
-        const kitchen = await kitchenModel.createKitchen(parseInt(userId));
+        const kitchen = await kitchenModel.createKitchen(parseInt(userId), req.body.name);
         res.status(201).json({
             message: "Kitchen added",
             kitchen: kitchen,
