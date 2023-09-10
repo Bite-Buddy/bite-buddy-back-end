@@ -28,7 +28,7 @@ export default function getEndpoints() {
   app.get("/kitchens/users/:id", kitchenController.getUsersByKitchen); // get all related users
   app.post("/kitchens/users/:id", kitchenController.createKitchen);
   app.patch("/kitchens/:id", kitchenController.updateKitchenById);
-  app.delete("/kitchens/users/:id", kitchenController.deleteKitchen);
+  app.delete("/kitchens/:id", kitchenController.deleteKitchen);
 
   // food
   app.get("/foods", foodController.getFood);
