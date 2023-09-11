@@ -7,7 +7,7 @@
     "start": "ts-node index.ts",
     "test": "jest",
     "build": "npm install && npx prisma migrate deploy",
-    "reset": "npx prisma migrate deploy",
+    "reset": "npx prisma migrate reset",
     "dev": "nodemon"
   },
   "keywords": [],
