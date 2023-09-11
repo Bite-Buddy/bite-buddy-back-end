@@ -47,6 +47,21 @@ export async function createKitchen(req: Request, res: Response) {
     }
 }
 
+export async function updateKitchenById(req: Request, res: Response) {
+  try {
+      const kitchenId = parseInt(req.params.id);
+      const name = req.body.name;
+      const kitchenResponse = await kitchenModel.updateKitchenById(kitchenId, name);
+      res.status(200).send({
+          message: "Kitchen Updated",
+          kitchenResponse: kitchenResponse,
+      })
+  }  
+  catch (error) { 
+      res.status(500).send("Error: " + error)
+  }
+}
+
 export async function deleteKitchen(req: Request, res: Response) {
     try {
         const kitchenId = req.params.id;

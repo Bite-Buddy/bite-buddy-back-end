@@ -29,6 +29,9 @@ export async function getBySupabaseId(req: Request, res: Response) {
     try {
         const id = req.params.id;
         const user = await userModel.getBySupabaseId(id);
+        if (!user) {
+            res.status(404).send({failed: "user not found"})
+        }
         res.status(200).send(user);
     }
     catch (error) {
@@ -37,18 +40,9 @@ export async function getBySupabaseId(req: Request, res: Response) {
 }
 
 export async function createUser(req: Request, res: Response) {
-    try {
-        if (!req.body.email || !req.body.supabase_id) {
-            res.status(400).send("Error: missing user info")
-        }
-        else {
-            const user = await userModel.createUser(req.body);
-            res.status(200).send(user);
-        }
-    }
-    catch (error) {
-        res.status(500).send("Error: " + error);
-    }
+   
+    const user = await userModel.createUser(req.body);
+    res.status(200).send(user);
 }
 
 // When thinking about these next two functions I realized they will be more complex (needing to be logged in with 

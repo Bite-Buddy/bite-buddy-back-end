@@ -20,6 +20,16 @@ export async function deleteKitchen(kitchenId: number) {
   });
 }
 
+export async function updateKitchenById(kitchenId: number, name: string) {
+  return  await prisma.kitchen.update({
+    where: {
+      id: kitchenId
+    },
+    data: {name: name}
+  });
+}
+
+
 export async function getUsersByKitchen(kitchenId: number) {
   return  await prisma.user.findMany({
     where: {
