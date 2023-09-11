@@ -1,9 +1,7 @@
 import {Request, Response} from 'express';
 import * as userModel from "./userModel"
 
-
 export async function getUsers(req: Request, res: Response) {
-    console.log("😂😂😂😂")
     try {
         const users = await userModel.getUsers();
         res.status(200).send(users)
@@ -25,14 +23,15 @@ export async function getById(req: Request, res: Response) {
 }
 
 export async function getBySupabaseId(req: Request, res: Response) {
-    console.log("🙌🙌🙌🙌")
     try {
         const id = req.params.id;
         const user = await userModel.getBySupabaseId(id);
         if (!user) {
             res.status(404).send({failed: "user not found"})
         }
-        res.status(200).send(user);
+        else {
+            res.status(200).send(user);
+        }
     }
     catch (error) {
         res.status(500).send("Error: " + error)
@@ -40,9 +39,21 @@ export async function getBySupabaseId(req: Request, res: Response) {
 }
 
 export async function createUser(req: Request, res: Response) {
-   
-    const user = await userModel.createUser(req.body);
-    res.status(200).send(user);
+   try {
+    if (!req.body.supabase_id || !req.body.email) {
+        res.status(200).send("missing details");
+    }
+    else {
+        const user = await userModel.createUser(req.body);
+        res.status(200).send(user);
+    }
+   }
+   catch (error) {
+    console.log(error);
+    throw error;
+   }
+    
+    
 }
 
 // When thinking about these next two functions I realized they will be more complex (needing to be logged in with 
