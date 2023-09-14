@@ -14,7 +14,9 @@ model User {
   id           Int      @id @default(autoincrement())
   supabase_id  String   @unique
   email        String   @unique
-  kitchens     Kitchen[] 
+  kitchens     Kitchen[]
+  sentInvites Invite[] @relation("SentInvites")
+  receivedInvites Invite[] @relation("ReceivedInvites")
   @@map("user")
 }
 
@@ -22,7 +24,8 @@ model Kitchen {
 id           Int      @id @default(autoincrement())
 name         String    @db.VarChar(255)
 users        User[]
-food_list    Food[]  
+food_list    Food[]
+invites Invite[]
 @@map("kitchen")
 }
 
@@ -35,4 +38,16 @@ model Food {
   kitchen      Kitchen    @relation(fields: [kitchen_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
   kitchen_id    Int
   @@map("food")
+}
+
+model Invite {
+  id          Int      @id @default(autoincrement())
+  status      String   
+  kitchen Kitchen  @relation(fields: [kitchen_id], references: [id])
+  sender     User     @relation("SentInvites", fields: [sender_id], references: [id])
+  recipient  User     @relation("ReceivedInvites", fields: [recipient_id], references: [id])
+  sender_id    Int @unique
+  recipient_id Int @unique
+  kitchen_id Int @unique
+  @@map("invite")
 }
