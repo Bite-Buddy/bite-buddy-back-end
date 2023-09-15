@@ -41,8 +41,8 @@ model Food {
 
 model Invite {
   id          Int      @id @default(autoincrement())
-  kitchen Kitchen  @relation(fields: [kitchen_id], references: [id])
-  recipient  User     @relation(fields: [recipient_id], references: [id])
+  kitchen Kitchen  @relation(fields: [kitchen_id], references: [id], onDelete: Cascade)
+  recipient  User     @relation(fields: [recipient_id], references: [id], onDelete: Cascade)
   recipient_id Int 
   kitchen_id Int 
   @@map("invite")
