@@ -15,8 +15,7 @@ model User {
   supabase_id  String   @unique
   email        String   @unique
   kitchens     Kitchen[]
-  sentInvites Invite[] @relation("SentInvites")
-  receivedInvites Invite[] @relation("ReceivedInvites")
+  invites Invite[] 
   @@map("user")
 }
 
@@ -42,12 +41,9 @@ model Food {
 
 model Invite {
   id          Int      @id @default(autoincrement())
-  status      String   
   kitchen Kitchen  @relation(fields: [kitchen_id], references: [id])
-  sender     User     @relation("SentInvites", fields: [sender_id], references: [id])
-  recipient  User     @relation("ReceivedInvites", fields: [recipient_id], references: [id])
-  sender_id    Int @unique
-  recipient_id Int @unique
-  kitchen_id Int @unique
+  recipient  User     @relation(fields: [recipient_id], references: [id])
+  recipient_id Int 
+  kitchen_id Int 
   @@map("invite")
 }
