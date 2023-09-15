@@ -4,6 +4,7 @@ import cors from "cors";
 import * as userController from "./src/user/userController";
 import * as kitchenController from "./src/kitchen/kitchenController";
 import * as foodController from "./src/food/foodController";
+import * as inviteController from "./src/invite/inviteController";
 
 const app = express();
 app.use(express.json());
@@ -44,7 +45,9 @@ export default function getEndpoints() {
   //createInvite (endpoint, takes kitchen id and recipient email, finds recipient id via email and creates an invite that has those two things )
   //deleteInvite (endpoint, fetched when user clicks yes or no buttons)
   //acceptInvite (endpoint, takes invite then calls model functions to add user to kitchen and kitchen to user before deleting invite)
- 
+  app.post("/invites/users", inviteController.createInvite);
+  app.delete("/invites/users/reject", inviteController.deleteInvite);
+  app.delete("/invites/users/accept", inviteController.acceptInvite);
   
 
 
