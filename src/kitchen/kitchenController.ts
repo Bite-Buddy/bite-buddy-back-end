@@ -62,6 +62,27 @@ export async function updateKitchenById(req: Request, res: Response) {
   }
 }
 
+export async function addUserRelationship(req: Request, res: Response) {
+    try {
+        if (!req.params.id || ! req.params.userId) {
+            res.status(400).send("missing kitchen id or user id")
+        }
+        else {
+            const kitchenId = parseInt(req.params.id);
+            const userId = parseInt(req.params.userId);
+            const updatedKitchen = await kitchenModel.addUserRelationship(kitchenId, userId);
+            res.status(204).send({
+                message: "Kitchen relationship updated",
+                updatedKitchen: updatedKitchen,
+            });
+        }
+        
+    }  
+    catch (error) { 
+        res.status(500).send("Error: " + error)
+    }
+  }
+
 export async function deleteKitchen(req: Request, res: Response) {
     try {
         const kitchenId = req.params.id;
