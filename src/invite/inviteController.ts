@@ -10,7 +10,7 @@ export async function createInvite(req: Request, res: Response) {
             const recipientEmail = req.body.email;
             const kitchenId = req.body.kitchenId;
             const invite = await inviteModel.createInvite(parseInt(kitchenId), recipientEmail);
-            res.status(200).send({
+            res.status(201).send({
                 message: "Invite sent",
                 invite: invite,
             });
