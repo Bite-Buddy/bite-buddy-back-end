@@ -37,7 +37,7 @@ export async function createKitchen(req: Request, res: Response) {
     try {
         const userId = req.params.id;
         const kitchen = await kitchenModel.createKitchen(parseInt(userId), req.body.name);
-        res.status(201).json({
+        res.status(201).json({ //This works fine but unsure why it's .json vs .send
             message: "Kitchen added",
             kitchen: kitchen,
           });
