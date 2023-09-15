@@ -57,7 +57,7 @@ export async function getByEmail(req: Request, res: Response) {
 export async function createUser(req: Request, res: Response) {
    try {
     if (!req.body.supabase_id || !req.body.email) {
-        res.status(200).send("missing details");
+        res.status(400).send("missing details");
     }
     else {
         const user = await userModel.createUser(req.body);
