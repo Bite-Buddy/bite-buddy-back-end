@@ -38,6 +38,22 @@ export async function getBySupabaseId(req: Request, res: Response) {
     }
 }
 
+export async function getByEmail(req: Request, res: Response) {
+    try {
+        const email = req.params.email;
+        const user = await userModel.getByEmail(email);
+        if (!user) {
+            res.status(404).send({failed: "No match found with that email"})
+        }
+        else {
+            res.status(200).send(user);
+        }
+    }
+    catch (error) {
+        res.status(500).send("Error: " + error)
+    }
+}
+
 export async function createUser(req: Request, res: Response) {
    try {
     if (!req.body.supabase_id || !req.body.email) {
