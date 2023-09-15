@@ -1,5 +1,6 @@
 import prisma from '../util/prisma-client';
 import * as userModel from "../user/userModel"
+import * as kitchenModel from "../kitchen/kitchenModel"
 
 // interface IInvite {
 //     recipientId: number,
@@ -22,12 +23,24 @@ export async function createInvite(kitchenId: number, recipientEmail: string) {
 
 export async function deleteInvite(inviteId: number) {
     return await prisma.invite.delete({
-        where: {
-            id: inviteId
-        }
+        where: {id: inviteId}
     })
 }
 
 export async function acceptInvite(inviteId: number) {
-
+    const inviteInfo = await prisma.invite.findUnique({ //Implement getById function within acceptInvite
+        where: {
+            id: inviteId
+        }
+    })
+    if (inviteInfo) {
+        await kitchenModel.addUserToKitchen(inviteInfo.kitchen_id);
+        await userModel.addKitchenToUser(inviteInfo.recipient_id);
+        return await prisma.invite.delete({
+            where: {id: inviteId}
+        })
+    }
+    else {
+        return false;
+    }
 }
