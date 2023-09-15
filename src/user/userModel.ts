@@ -11,6 +11,21 @@ export async function createUser(user: IUser) {
   })
 }
 
+export async function addKitchenRelationship(id: number, kitchen_id: number) {
+  return await prisma.user.update({
+    where: { id: id },
+    data: {
+      kitchens: {
+        connect: { id: kitchen_id }
+      }
+    },
+    include: {
+      kitchens: true,
+      invites: true
+    }
+  });
+}
+
 export async function getUsers() {
   return await prisma.user.findMany({
     include: { 
