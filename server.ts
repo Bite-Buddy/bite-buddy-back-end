@@ -15,23 +15,20 @@ app.use(cors({
 
 export default function getEndpoints() {
   // user
-  app.get("/users", userController.getUsers); // mainly here for testing
+  app.get("/users", userController.getUsers); 
   app.get("/users/:id", userController.getById);
-  //addKitchenToUser?
-  //getByEmail (user model function that gets called in createInvite)
-  //getInvites (modify getById to include invites:true)
   app.get("/users/supabase/:id", userController.getBySupabaseId);
+  app.get("/users/email/:email", userController.getByEmail);
   app.post("/users", userController.createUser);
-  // app.patch("/users/:id", userController.updateUserById); // probably need more patch endpoints
+  app.patch("/users/kitchens", userController.addKitchenRelationship);
   app.delete("/users/:id", userController.deleteUserById);
-  
 
   // kitchen
   app.get("/kitchens", kitchenController.getKitchens); // mainly here for testing
   app.get("/kitchens/:id", kitchenController.getById);
   app.get("/kitchens/users/:id", kitchenController.getUsersByKitchen); // get all related users
   app.post("/kitchens/users/:id", kitchenController.createKitchen);
-  //addUserById (patch endpoint, add user to kitchen array by user id)
+  app.patch("/kitchens/users", kitchenController.addUserRelationship);
   app.patch("/kitchens/:id", kitchenController.updateKitchenById);
   app.delete("/kitchens/:id", kitchenController.deleteKitchen);
 
