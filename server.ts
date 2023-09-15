@@ -41,10 +41,8 @@ export default function getEndpoints() {
 
   // invite 
   app.post("/invites/users", inviteController.createInvite);
-  app.delete("/invites/users/reject", inviteController.deleteInvite);
-  app.delete("/invites/users/accept", inviteController.acceptInvite);
+  app.delete("/invites/users/accept/:id", inviteController.acceptInvite);
+  app.delete("/invites/users/reject/:id", inviteController.deleteInvite);
   
-
-
   return app;
 }
