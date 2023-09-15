@@ -34,3 +34,17 @@ export async function deleteInvite(req: Request, res: Response) {
         res.status(500).send("Error: " + error);
     }
 }
+
+export async function acceptInvite(req: Request, res: Response) {
+    try {
+        const inviteId = req.params.id;
+        const inviteResponse = await inviteModel.acceptInvite(parseInt(inviteId))
+        res.status(200).send({
+            message: "Invite accepted",
+            inviteResponse: inviteResponse,
+        })
+    }
+    catch (error) {
+        res.status(500).send("Error: " + error);
+    }
+}
