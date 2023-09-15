@@ -68,8 +68,22 @@ export async function createUser(req: Request, res: Response) {
     console.log(error);
     throw error;
    }
-    
-    
+}
+
+export async function addKitchenRelationship(req: Request, res: Response) {
+    try {
+        if (!req.body.id || !req.body.kitchen_id) {
+            res.status(400).send("missing details");
+        }
+        else {
+            const updatedUser = await userModel.addKitchenRelationship(req.body.id, req.body.kitchen_id);
+            res.status(200).send(updatedUser);
+        }
+    }
+    catch (error) {
+        console.error("Error adding kitchen relationship to user", error);
+        throw error;
+    }
 }
 
 // When thinking about these next two functions I realized they will be more complex (needing to be logged in with 
