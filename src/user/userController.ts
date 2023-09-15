@@ -76,7 +76,9 @@ export async function addKitchenRelationship(req: Request, res: Response) {
             res.status(400).send("missing details");
         }
         else {
-            const updatedUser = await userModel.addKitchenRelationship(req.body.id, req.body.kitchen_id);
+            const id = parseInt(req.body.id);
+            const kitchenId = parseInt(req.body.kitchen_id);
+            const updatedUser = await userModel.addKitchenRelationship(id, kitchenId);
             res.status(204).send(updatedUser);
         }
     }
