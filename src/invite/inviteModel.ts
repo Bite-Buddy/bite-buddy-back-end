@@ -34,8 +34,8 @@ export async function acceptInvite(inviteId: number) {
         }
     })
     if (inviteInfo) {
-        await kitchenModel.addUserToKitchen(inviteInfo.kitchen_id);
-        await userModel.addKitchenToUser(inviteInfo.recipient_id);
+        await kitchenModel.addUserRelationship(inviteInfo.kitchen_id, inviteInfo.recipient_id);
+        await userModel.addKitchenRelationship(inviteInfo.recipient_id, inviteInfo.kitchen_id);
         return await prisma.invite.delete({
             where: {id: inviteId}
         })
