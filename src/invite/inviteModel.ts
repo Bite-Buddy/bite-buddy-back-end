@@ -6,9 +6,15 @@ export async function createInvite(kitchenId: number, recipientEmail: string) {
 
     if (recipient) {
         const recipientId = recipient.id;
-        return await prisma.invite.create({
-            data: {recipient_id: recipientId, kitchen_id: kitchenId}
-        });
+        const exists = await inviteExists(recipientId, kitchenId);
+        if (exists) {
+            return false;
+        }
+        else {
+            return await prisma.invite.create({
+                data: {recipient_id: recipientId, kitchen_id: kitchenId}
+            });
+        }
     }
     else {
         return false;
@@ -34,4 +40,13 @@ export async function acceptInvite(inviteId: number) {
     else {
         return false;
     }
+}
+
+export async function inviteExists(recipientId: number, kitchenId: number) {
+    return await prisma.invite.findFirst({
+        where: {  
+            recipient_id: recipientId,
+            kitchen_id: kitchenId,
+        }
+    });
 }
