@@ -1,8 +1,8 @@
 import prisma from '../util/prisma-client';
-import * as userModel from "../user/userModel";
+import { getByEmail, addKitchenRelationship } from "../user/userModel";
 
 export async function createInvite(kitchenId: number, recipientEmail: string) {
-    const recipient = await userModel.getByEmail(recipientEmail);
+    const recipient = await getByEmail(recipientEmail);
 
     if (recipient) {
         const recipientId = recipient.id;
@@ -26,7 +26,7 @@ export async function acceptInvite(inviteId: number) {
         where: { id: inviteId }
     });
     if (inviteInfo) {
-        await userModel.addKitchenRelationship(inviteInfo.recipient_id, inviteInfo.kitchen_id);
+        await addKitchenRelationship(inviteInfo.recipient_id, inviteInfo.kitchen_id);
         return await prisma.invite.delete({
             where: {id: inviteId}
         });
