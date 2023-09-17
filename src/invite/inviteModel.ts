@@ -35,3 +35,13 @@ export async function acceptInvite(inviteId: number) {
         return false;
     }
 }
+
+export async function getInviteById(inviteId: number) {
+    return await prisma.invite.findUnique({
+        where: { id: inviteId }
+    })
+}
+
+export async function getInvites() {
+    return await prisma.invite.findMany();
+}
