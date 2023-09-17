@@ -48,3 +48,24 @@ export async function acceptInvite(req: Request, res: Response) {
         res.status(500).send("Error: " + error);
     }
 }
+
+export async function getByInviteId(req: Request, res: Response) {
+    try {
+        const id = req.params.id;
+        const invite = await inviteModel.getInviteById(parseInt(id));
+        res.status(200).send(invite)
+    }
+    catch (error) {
+        res.status(500).send("Error: " + error)
+    }
+}
+
+export async function getInvites(req: Request, res: Response) {
+    try {
+        const invites = await inviteModel.getInvites();
+        res.status(200).send(invites)
+    }
+    catch (error) {
+        res.status(500).send("Error: " + error)
+    }
+}
