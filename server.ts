@@ -40,6 +40,8 @@ export default function getEndpoints() {
   app.delete("/foods/:foodId", foodController.deleteFoodById);
 
   // invite 
+  app.get("/invites/users", inviteController.getInvites);
+  app.get("/invites/users/:id", inviteController.getByInviteId);
   app.post("/invites/users", inviteController.createInvite);
   app.delete("/invites/users/accept/:id", inviteController.acceptInvite);
   app.delete("/invites/users/reject/:id", inviteController.deleteInvite);
