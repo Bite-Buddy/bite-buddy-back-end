@@ -1,14 +1,20 @@
 import prisma from '../util/prisma-client';
-import * as userModel from "../user/userModel";
+import { getByEmail, addKitchenRelationship } from "../user/userModel";
 
 export async function createInvite(kitchenId: number, recipientEmail: string) {
-    const recipient = await userModel.getByEmail(recipientEmail);
+    const recipient = await getByEmail(recipientEmail);
 
     if (recipient) {
         const recipientId = recipient.id;
-        return await prisma.invite.create({
-            data: {recipient_id: recipientId, kitchen_id: kitchenId}
-        });
+        const exists = await inviteExists(recipientId, kitchenId);
+        if (exists) {
+            return false;
+        }
+        else {
+            return await prisma.invite.create({
+                data: {recipient_id: recipientId, kitchen_id: kitchenId}
+            });
+        }
     }
     else {
         return false;
@@ -26,7 +32,7 @@ export async function acceptInvite(inviteId: number) {
         where: { id: inviteId }
     });
     if (inviteInfo) {
-        await userModel.addKitchenRelationship(inviteInfo.recipient_id, inviteInfo.kitchen_id);
+        await addKitchenRelationship(inviteInfo.recipient_id, inviteInfo.kitchen_id);
         return await prisma.invite.delete({
             where: {id: inviteId}
         });
@@ -34,6 +40,15 @@ export async function acceptInvite(inviteId: number) {
     else {
         return false;
     }
+}
+
+export async function inviteExists(recipientId: number, kitchenId: number) {
+    return await prisma.invite.findFirst({
+        where: {  
+            recipient_id: recipientId,
+            kitchen_id: kitchenId,
+        }
+    });
 }
 
 export async function getInviteById(inviteId: number) {
