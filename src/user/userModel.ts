@@ -72,7 +72,24 @@ export async function getBySupabaseId(supabase_id: string) {
 }
 
 export async function deleteUserById(id: number) {
-  return  await prisma.user.delete({
-    where: {id: id}
+  const user = await prisma.user.findUnique({
+    where: { id: id },
+    include: { 
+      kitchens: {
+        include: {
+          users: true
+        }
+      }
+    },
   });
+  
+  if(user) {
+    const kitchens = user.kitchens;
+
+    for (const kitchen of kitchens) {
+      kitchen.users.length <= 1 && await prisma.kitchen.delete({ where: { id: kitchen.id } });
+    }
+    await prisma.user.delete({ where: { id: id } });
+  }
+  return user;
 }
