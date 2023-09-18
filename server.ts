@@ -5,6 +5,7 @@ import * as userController from "./src/user/userController";
 import * as kitchenController from "./src/kitchen/kitchenController";
 import * as foodController from "./src/food/foodController";
 import * as inviteController from "./src/invite/inviteController";
+import * as inviteController from "./src/invite/inviteController";
 
 const app = express();
 app.use(express.json());
@@ -29,6 +30,7 @@ export default function getEndpoints() {
   app.get("/kitchens/users/:id", kitchenController.getUsersByKitchen); // get all related users
   app.post("/kitchens/users/:id", kitchenController.createKitchen);
   app.patch("/kitchens/users", kitchenController.addUserRelationship);
+  app.patch("/kitchens/users", kitchenController.addUserRelationship);
   app.patch("/kitchens/:id", kitchenController.updateKitchenById);
   app.delete("/kitchens/:id", kitchenController.deleteKitchen);
 
@@ -42,6 +44,11 @@ export default function getEndpoints() {
   // invite 
   app.get("/invites/users", inviteController.getInvites);
   app.get("/invites/users/:id", inviteController.getByInviteId);
+  app.post("/invites/users", inviteController.createInvite);
+  app.delete("/invites/users/accept/:id", inviteController.acceptInvite);
+  app.delete("/invites/users/reject/:id", inviteController.deleteInvite);
+  
+  // invite 
   app.post("/invites/users", inviteController.createInvite);
   app.delete("/invites/users/accept/:id", inviteController.acceptInvite);
   app.delete("/invites/users/reject/:id", inviteController.deleteInvite);
