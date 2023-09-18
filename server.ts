@@ -5,7 +5,7 @@ import * as userController from "./src/user/userController";
 import * as kitchenController from "./src/kitchen/kitchenController";
 import * as foodController from "./src/food/foodController";
 import * as inviteController from "./src/invite/inviteController";
-import * as inviteController from "./src/invite/inviteController";
+
 
 const app = express();
 app.use(express.json());
@@ -47,11 +47,7 @@ export default function getEndpoints() {
   app.post("/invites/users", inviteController.createInvite);
   app.delete("/invites/users/accept/:id", inviteController.acceptInvite);
   app.delete("/invites/users/reject/:id", inviteController.deleteInvite);
-  
-  // invite 
-  app.post("/invites/users", inviteController.createInvite);
-  app.delete("/invites/users/accept/:id", inviteController.acceptInvite);
-  app.delete("/invites/users/reject/:id", inviteController.deleteInvite);
+
   
   return app;
 }
