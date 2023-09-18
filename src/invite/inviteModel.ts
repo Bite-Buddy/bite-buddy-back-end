@@ -50,3 +50,13 @@ export async function inviteExists(recipientId: number, kitchenId: number) {
         }
     });
 }
+
+export async function getInviteById(inviteId: number) {
+    return await prisma.invite.findUnique({
+        where: { id: inviteId }
+    })
+}
+
+export async function getInvites() {
+    return await prisma.invite.findMany();
+}
